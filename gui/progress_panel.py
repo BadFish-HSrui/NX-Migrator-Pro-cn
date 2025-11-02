@@ -24,7 +24,7 @@ class ProgressPanel(ttk.Frame):
         # Stage label
         self.stage_label = ttk.Label(
             self,
-            text="Ready to begin migration",
+            text="准备开始迁移",
             font=("Segoe UI", 10, "bold"),
             foreground="white",
             bootstyle="inverse-dark"
@@ -69,9 +69,9 @@ class ProgressPanel(ttk.Frame):
         """Start progress"""
         self.progressbar.config(value=0, bootstyle=INFO)
         if self.mode == "cleanup":
-            self.stage_label.config(text="Starting cleanup...")
+            self.stage_label.config(text="开始清理...")
         else:
-            self.stage_label.config(text="Starting migration...")
+            self.stage_label.config(text="开始迁移...")
         self.percent_label.config(text="0%")
 
     def update(self, stage, percent):
@@ -87,18 +87,18 @@ class ProgressPanel(ttk.Frame):
         """Mark as complete"""
         self.progressbar.config(value=100, bootstyle=SUCCESS)
         if self.mode == "cleanup":
-            self.stage_label.config(text="✓ Cleanup Complete", foreground="green")
+            self.stage_label.config(text="✓ 清理完成", foreground="green")
         else:
-            self.stage_label.config(text="✓ Migration Complete", foreground="green")
+            self.stage_label.config(text="✓ 迁移完成", foreground="green")
         self.percent_label.config(text="100%")
 
     def error(self):
         """Mark as error"""
         self.progressbar.config(bootstyle=DANGER)
         if self.mode == "cleanup":
-            self.stage_label.config(text="✗ Cleanup Failed", foreground="red")
+            self.stage_label.config(text="✗ 清理失败", foreground="red")
         else:
-            self.stage_label.config(text="✗ Migration Failed", foreground="red")
+            self.stage_label.config(text="✗ 迁移失败", foreground="red")
 
     def reset(self, mode="migration"):
         """Reset progress panel to initial state with specified mode"""
@@ -109,6 +109,6 @@ class ProgressPanel(ttk.Frame):
         self.percent_label.config(text="0%")
 
         if mode == "cleanup":
-            self.stage_label.config(text="Ready to begin cleanup", foreground="white")
+            self.stage_label.config(text="准备开始清理", foreground="white")
         else:
-            self.stage_label.config(text="Ready to begin migration", foreground="white")
+            self.stage_label.config(text="准备开始迁移", foreground="white")

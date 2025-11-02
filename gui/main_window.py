@@ -70,14 +70,14 @@ class MainWindow:
 
         # Help Menu
         help_menu = ttk.Menu(menubar, tearoff=0)
-        menubar.add_cascade(label="Help", menu=help_menu)
-        help_menu.add_command(label="Usage Guide", command=self._show_usage_guide)
-        help_menu.add_command(label="Troubleshooting", command=self._show_troubleshooting)
+        menubar.add_cascade(label="帮助", menu=help_menu)
+        help_menu.add_command(label="使用指南", command=self._show_usage_guide)
+        help_menu.add_command(label="故障排除", command=self._show_troubleshooting)
         help_menu.add_separator()
-        help_menu.add_command(label="View Logs", command=self._open_logs)
-        help_menu.add_command(label="Report Issue on GitHub", command=self._open_github_issues)
+        help_menu.add_command(label="查看日志", command=self._open_logs)
+        help_menu.add_command(label="在GitHub上报告问题", command=self._open_github_issues)
         help_menu.add_separator()
-        help_menu.add_command(label="About", command=self._show_about)
+        help_menu.add_command(label="关于", command=self._show_about)
 
     def _create_widgets(self):
         """Create all GUI widgets"""
@@ -87,14 +87,14 @@ class MainWindow:
 
         self.title_label = ttk.Label(
             self.header_frame,
-            text="⚙️ NX Migrator Pro",
+            text="⚙️ NX 迁移专家",
             font=("Segoe UI", 20, "bold"),
             bootstyle="inverse-primary"
         )
 
         self.subtitle_label = ttk.Label(
             self.header_frame,
-            text="Professional partition management for Nintendo Switch SD cards • Migration • Cleanup • FAT32 • Linux • Android • emuMMC",
+            text="任天堂Switch SD卡专业分区管理工具 • 迁移 • 清理 • FAT32 • Linux • Android • emuMMC",
             font=("Segoe UI", 10),
             bootstyle="inverse-primary"
         )
@@ -104,13 +104,13 @@ class MainWindow:
 
         ttk.Label(
             self.mode_frame,
-            text="Mode:",
+            text="模式:",
             font=("Segoe UI", 11, "bold")
         ).pack(side=LEFT, padx=(10, 5))
 
         self.migration_mode_btn = ttk.Button(
             self.mode_frame,
-            text="🔄 Migration Mode",
+            text="🔄 迁移模式",
             command=lambda: self._switch_mode("migration"),
             bootstyle="primary",
             width=20
@@ -119,7 +119,7 @@ class MainWindow:
 
         self.cleanup_mode_btn = ttk.Button(
             self.mode_frame,
-            text="🧹 Cleanup Mode",
+            text="🧹 清理模式",
             command=lambda: self._switch_mode("cleanup"),
             bootstyle="secondary-outline",
             width=20
@@ -128,7 +128,7 @@ class MainWindow:
 
         ttk.Label(
             self.mode_frame,
-            text="Migration: Copy from small SD to large SD  |  Cleanup: Remove partitions from single SD",
+            text="迁移: 从小容量SD卡复制到大容量SD卡  |  清理: 从单个SD卡移除分区",
             font=("Segoe UI", 9),
             foreground="gray"
         ).pack(side=LEFT, padx=20)
@@ -139,7 +139,7 @@ class MainWindow:
         # Left Panel - Disk Selection
         self.left_panel = ttk.Labelframe(
             self.content_frame,
-            text="Step 1: Select Disks",
+            text="步骤1: 选择磁盘",
             bootstyle=INFO,
             padding=10
         )
@@ -155,7 +155,7 @@ class MainWindow:
         # Scan button
         self.scan_button = ttk.Button(
             self.left_panel,
-            text="🔍 Simulate Migration",
+            text="🔍 模拟迁移",
             command=self._scan_sd_cards,
             bootstyle=SUCCESS,
             width=30
@@ -164,7 +164,7 @@ class MainWindow:
         # Middle Panel - Partition Information
         self.middle_panel = ttk.Labelframe(
             self.content_frame,
-            text="Step 2: Review Partitions",
+            text="步骤2: 查看分区",
             bootstyle=INFO,
             padding=10
         )
@@ -172,19 +172,19 @@ class MainWindow:
         # Source partition view (no tabs, just direct frames)
         self.source_partition_frame = PartitionViewerFrame(
             self.middle_panel,
-            title="📀 Source SD Card"
+            title="📀 源SD卡"
         )
 
         # Target partition view
         self.target_partition_frame = PartitionViewerFrame(
             self.middle_panel,
-            title="💾 Target SD Card (After Migration)"
+            title="💾 目标SD卡 (迁移后)"
         )
 
         # Right Panel - Migration Options
         self.right_panel = ttk.Labelframe(
             self.content_frame,
-            text="Step 3: Migration Options",
+            text="步骤3: 迁移选项",
             bootstyle=INFO,
             padding=10
         )
@@ -197,7 +197,7 @@ class MainWindow:
         # Migration button
         self.migrate_button = ttk.Button(
             self.right_panel,
-            text="🚀 Start Migration",
+            text="🚀 开始迁移",
             command=self._start_migration,
             bootstyle=SUCCESS,
             width=30,
@@ -218,7 +218,7 @@ class MainWindow:
 
         self.status_label = ttk.Label(
             self.status_frame,
-            text="Ready. Click 'Refresh Disks', select source and target drives, then click 'Simulate Migration'.",
+            text="就绪。点击'刷新磁盘'，选择源和目标驱动器，然后点击'模拟迁移'。",
             font=("Segoe UI", 9),
             foreground="white",
             bootstyle="inverse-dark"
@@ -227,7 +227,7 @@ class MainWindow:
         # Log toggle button
         self.log_toggle_btn = ttk.Button(
             self.status_frame,
-            text="Show Log",
+            text="显示日志",
             command=self._toggle_log_panel,
             bootstyle="info-outline",
             width=12
@@ -299,14 +299,14 @@ class MainWindow:
             self.cleanup_mode_btn.config(bootstyle="secondary-outline")
 
             # Update UI labels for migration mode
-            self.left_panel.config(text="Step 1: Select Source & Target Disks")
-            self.middle_panel.config(text="Step 2: Review Partitions")
-            self.right_panel.config(text="Step 3: Migration Options")
-            self.scan_button.config(text="🔍 Simulate Migration")
-            self.migrate_button.config(text="🚀 Start Migration")
-            self.source_partition_frame.update_title("📀 Source SD Card")
-            self.target_partition_frame.update_title("💾 Target SD Card (After Migration)")
-            self._update_status("Migration Mode: Select source and target SD cards, then click 'Simulate Migration'.")
+            self.left_panel.config(text="步骤1: 选择源和目标磁盘")
+            self.middle_panel.config(text="步骤2: 查看分区")
+            self.right_panel.config(text="步骤3: 迁移选项")
+            self.scan_button.config(text="🔍 模拟迁移")
+            self.migrate_button.config(text="🚀 开始迁移")
+            self.source_partition_frame.update_title("📀 源SD卡")
+            self.target_partition_frame.update_title("💾 目标SD卡 (迁移后)")
+            self._update_status("迁移模式: 选择源和目标SD卡，然后点击'模拟迁移'。")
 
             # Show target disk selector
             self.disk_selector.show_target_selector()
@@ -319,14 +319,14 @@ class MainWindow:
             self.cleanup_mode_btn.config(bootstyle="success")
 
             # Update UI labels for cleanup mode
-            self.left_panel.config(text="Step 1: Select SD Card")
-            self.middle_panel.config(text="Step 2: Review Current Partitions")
-            self.right_panel.config(text="Step 3: Cleanup Options")
-            self.scan_button.config(text="🔍 Scan SD Card")
-            self.migrate_button.config(text="🧹 Start Cleanup")
-            self.source_partition_frame.update_title("📀 Current SD Card Layout")
-            self.target_partition_frame.update_title("✨ After Cleanup (Preview)")
-            self._update_status("Cleanup Mode: Select an SD card to clean up unwanted partitions.")
+            self.left_panel.config(text="步骤1: 选择SD卡")
+            self.middle_panel.config(text="步骤2: 查看当前分区")
+            self.right_panel.config(text="步骤3: 清理选项")
+            self.scan_button.config(text="🔍 扫描SD卡")
+            self.migrate_button.config(text="🧹 开始清理")
+            self.source_partition_frame.update_title("📀 当前SD卡布局")
+            self.target_partition_frame.update_title("✨ 清理后 (预览)")
+            self._update_status("清理模式: 选择要清理不需要分区的SD卡。")
 
             # Hide target disk selector in cleanup mode
             self.disk_selector.hide_target_selector()
@@ -367,8 +367,8 @@ class MainWindow:
         # Validate target is larger than source
         if self.source_disk and disk_info['size_bytes'] <= self.source_disk['size_bytes']:
             self.show_custom_info(
-                "Invalid Target",
-                f"Target disk ({disk_info['letter']}, {disk_info['size_gb']:.1f} GB) must be larger than source disk ({self.source_disk['letter']}, {self.source_disk['size_gb']:.1f} GB)",
+                "无效目标",
+                f"目标磁盘 ({disk_info['letter']}, {disk_info['size_gb']:.1f} GB) 必须大于源磁盘 ({self.source_disk['letter']}, {self.source_disk['size_gb']:.1f} GB)",
                 width=500,
                 height=200
             )
@@ -403,21 +403,21 @@ class MainWindow:
     def _scan_sd_cards(self):
         """Scan SD card and simulate layout (works for both migration and cleanup modes)"""
         if not self.source_disk:
-            self.show_custom_info("No Disk Selected", "Please select an SD card first.", width=450, height=200)
+            self.show_custom_info("未选择磁盘", "请先选择一个SD卡。", width=450, height=200)
             return
 
         # In migration mode, require target disk
         if self.current_mode == "migration":
             if not self.target_disk:
-                self.show_custom_info("No Target Disk", "Please select both source and target SD cards.", width=450, height=200)
+                self.show_custom_info("未选择目标磁盘", "请选择源和目标SD卡。", width=450, height=200)
                 return
 
         if self.current_mode == "migration":
-            self._update_status("Scanning source disk and simulating migration...")
-            self.scan_button.config(state=DISABLED, text="⏳ Simulating...")
+            self._update_status("正在扫描源磁盘并模拟迁移...")
+            self.scan_button.config(state=DISABLED, text="⏳ 模拟中...")
         else:  # cleanup mode
-            self._update_status("Scanning SD card and simulating cleanup...")
-            self.scan_button.config(state=DISABLED, text="⏳ Scanning...")
+            self._update_status("正在扫描SD卡并模拟清理...")
+            self.scan_button.config(state=DISABLED, text="⏳ 扫描中...")
 
         # Run scan in thread to avoid blocking UI
         def scan_thread():
@@ -439,9 +439,9 @@ class MainWindow:
 
         # Update button text based on mode
         if self.current_mode == "migration":
-            self.scan_button.config(state=NORMAL, text="🔍 Simulate Migration")
+            self.scan_button.config(state=NORMAL, text="🔍 模拟迁移")
         else:
-            self.scan_button.config(state=NORMAL, text="🔍 Scan SD Card")
+            self.scan_button.config(state=NORMAL, text="🔍 扫描SD卡")
 
         # Display source partition information
         self.source_partition_frame.display_layout(source_layout, self.source_disk)
@@ -471,32 +471,32 @@ class MainWindow:
         summary = source_layout.get_summary()
 
         if self.current_mode == "migration":
-            self._update_status(f"Scan complete: {summary}. Calculating target layout...")
+            self._update_status(f"扫描完成: {summary}。正在计算目标布局...")
         else:
-            self._update_status(f"Scan complete: {summary}. Select cleanup options and calculate preview...")
+            self._update_status(f"扫描完成: {summary}。选择清理选项并计算预览...")
 
         # Automatically calculate and display the simulated target layout
         self._calculate_layout()
 
     def _on_scan_error(self, error_msg):
         """Called when disk scan fails"""
-        self.scan_button.config(state=NORMAL, text="🔍 Simulate Migration")
+        self.scan_button.config(state=NORMAL, text="🔍 模拟迁移")
 
         self.show_custom_info(
-            "Scan Failed",
-            f"Failed to scan disks:\n\n{error_msg}",
+            "扫描失败",
+            f"磁盘扫描失败:\n\n{error_msg}",
             width=500,
             height=250
         )
 
-        self._update_status("Scan failed. Please try again.")
+        self._update_status("扫描失败。请重试。")
 
     def _calculate_layout(self):
         """Calculate new partition layout (for both migration and cleanup modes)"""
         if not self.source_layout:
             self.show_custom_info(
-                "Missing Information",
-                "Please scan the SD card first.",
+                "缺少信息",
+                "请先扫描 SD 卡。",
                 width=500,
                 height=200
             )
@@ -505,15 +505,15 @@ class MainWindow:
         # In migration mode, require target disk
         if self.current_mode == "migration" and not self.target_disk:
             self.show_custom_info(
-                "Missing Information",
-                "Please select target disk first.",
+                "缺少信息",
+                "请先选择目标磁盘。",
                 width=500,
                 height=200
             )
             return
 
         try:
-            self._update_status("Calculating new partition layout...")
+            self._update_status("正在计算新分区布局...")
 
             if self.current_mode == "migration":
                 # Migration mode: calculate layout for target disk
@@ -557,18 +557,18 @@ class MainWindow:
             self.migrate_button.config(state=NORMAL)
 
             if self.current_mode == "migration":
-                self._update_status("Layout calculated. Ready to migrate.")
+                self._update_status("布局计算完成。准备开始迁移。")
             else:
-                self._update_status("Cleanup preview ready. Ready to start cleanup.")
+                self._update_status("清理预览准备完成。准备开始清理。")
 
         except Exception as e:
             self.show_custom_info(
-                "Calculation Failed",
-                f"Failed to calculate new layout:\n\n{str(e)}",
+                "计算失败",
+                f"计算新布局失败：\n\n{str(e)}",
                 width=500,
                 height=250
             )
-            self._update_status("Layout calculation failed.")
+            self._update_status("布局计算失败。")
 
     def _show_layout_comparison(self):
         """Show comparison between source and target layouts"""
@@ -577,7 +577,7 @@ class MainWindow:
 
         # Build comparison message based on mode
         if self.current_mode == "migration":
-            msg = "Migration Summary:\n\n"
+            msg = "迁移摘要：\n\n"
 
             # FAT32
             if self.migration_options['migrate_fat32']:
@@ -585,9 +585,9 @@ class MainWindow:
                 dst_fat = self.target_layout.get_fat32_size_mb()
                 fat32_gain = dst_fat - src_fat
                 if self.migration_options['expand_fat32']:
-                    msg += f"✓ FAT32: {src_fat:,} MB → {dst_fat:,} MB (+{fat32_gain:,} MB gained)\n"
+                    msg += f"✓ FAT32: {src_fat:,} MB → {dst_fat:,} MB (+{fat32_gain:,} MB 扩展)\n"
                 else:
-                    msg += f"✓ FAT32: {src_fat:,} MB → {dst_fat:,} MB (no expansion)\n"
+                    msg += f"✓ FAT32: {src_fat:,} MB → {dst_fat:,} MB (无扩展)\n"
 
             # Linux
             if self.source_layout.has_linux and self.migration_options['migrate_linux']:
@@ -597,19 +597,19 @@ class MainWindow:
             # Android
             if self.source_layout.has_android and self.migration_options['migrate_android']:
                 android_size = self.source_layout.get_android_size_mb()
-                android_type = "Dynamic" if self.source_layout.android_dynamic else "Legacy"
-                msg += f"✓ Android ({android_type}): {android_size:,} MB (preserved)\n"
+                android_type = "动态" if self.source_layout.android_dynamic else "传统"
+                msg += f"✓ Android ({android_type}): {android_size:,} MB (保持)\n"
 
             # emuMMC
             if self.source_layout.has_emummc and self.migration_options['migrate_emummc']:
                 emummc_size = self.source_layout.get_emummc_size_mb()
-                emummc_type = "Dual" if self.source_layout.emummc_double else "Single"
-                msg += f"✓ emuMMC ({emummc_type}): {emummc_size:,} MB (preserved)\n"
+                emummc_type = "双虚拟系统" if self.source_layout.emummc_double else "单虚拟系统"
+                msg += f"✓ emuMMC ({emummc_type}): {emummc_size:,} MB (保持)\n"
 
-            msg += f"\nSource Disk: {self.source_disk['size_gb']:.1f} GB\n"
-            msg += f"Target Disk: {self.target_disk['size_gb']:.1f} GB"
+            msg += f"\n源磁盘：{self.source_disk['size_gb']:.1f} GB\n"
+            msg += f"目标磁盘：{self.target_disk['size_gb']:.1f} GB"
 
-            self.show_custom_info("Layout Comparison", msg, width=550, height=400)
+            self.show_custom_info("布局对比", msg, width=550, height=400)
 
         else:  # cleanup mode
             msg = "Cleanup Summary:\n\n"
@@ -619,9 +619,9 @@ class MainWindow:
             dst_fat = self.target_layout.get_fat32_size_mb()
             fat32_gain = dst_fat - src_fat
             if self.cleanup_options['expand_fat32']:
-                msg += f"✓ FAT32: {src_fat:,} MB → {dst_fat:,} MB (+{fat32_gain:,} MB reclaimed)\n"
+                msg += f"✓ FAT32: {src_fat:,} MB → {dst_fat:,} MB (+{fat32_gain:,} MB 回收)\n"
             else:
-                msg += f"✓ FAT32: {src_fat:,} MB (no expansion)\n"
+                msg += f"✓ FAT32: {src_fat:,} MB (无扩展)\n"
 
             # Linux
             if self.source_layout.has_linux:
@@ -634,24 +634,24 @@ class MainWindow:
             # Android
             if self.source_layout.has_android:
                 android_size = self.source_layout.get_android_size_mb()
-                android_type = "Dynamic" if self.source_layout.android_dynamic else "Legacy"
+                android_type = "动态" if self.source_layout.android_dynamic else "传统"
                 if self.cleanup_options['remove_android']:
-                    msg += f"✗ Android ({android_type}): {android_size:,} MB (will be REMOVED)\n"
+                    msg += f"✗ Android ({android_type}): {android_size:,} MB (将被删除)\n"
                 else:
-                    msg += f"✓ Android ({android_type}): {android_size:,} MB (preserved)\n"
+                    msg += f"✓ Android ({android_type}): {android_size:,} MB (保持)\n"
 
             # emuMMC
             if self.source_layout.has_emummc:
                 emummc_size = self.source_layout.get_emummc_size_mb()
-                emummc_type = "Dual" if self.source_layout.emummc_double else "Single"
+                emummc_type = "双虚拟系统" if self.source_layout.emummc_double else "单虚拟系统"
                 if self.cleanup_options['remove_emummc']:
-                    msg += f"✗ emuMMC ({emummc_type}): {emummc_size:,} MB (will be REMOVED)\n"
+                    msg += f"✗ emuMMC ({emummc_type}): {emummc_size:,} MB (将被删除)\n"
                 else:
-                    msg += f"✓ emuMMC ({emummc_type}): {emummc_size:,} MB (preserved)\n"
+                    msg += f"✓ emuMMC ({emummc_type}): {emummc_size:,} MB (保持)\n"
 
-            msg += f"\nSD Card: {self.source_disk['size_gb']:.1f} GB"
+            msg += f"\nSD 卡：{self.source_disk['size_gb']:.1f} GB"
 
-            self.show_custom_info("Cleanup Summary", msg, width=550, height=380)
+            self.show_custom_info("清理摘要", msg, width=550, height=380)
 
     def _start_migration(self):
         """Start the migration or cleanup process (depending on mode)"""
@@ -659,14 +659,14 @@ class MainWindow:
         if self.current_mode == "migration":
             # Migration mode confirmations
             response = self.show_custom_confirm(
-                "Confirm Migration",
-                f"⚠️ WARNING ⚠️\n\n"
-                f"This will ERASE ALL DATA on the target disk:\n"
+                "确认迁移",
+                f"⚠️ 警告 ⚠️\n\n"
+                f"这将会清除目标磁盘上的所有数据：\n"
                 f"{self.target_disk['letter']} - {self.target_disk['name']} ({self.target_disk['size_gb']:.1f} GB)\n\n"
-                f"Source disk ({self.source_disk['letter']}) will NOT be modified.\n\n"
-                f"Are you sure you want to continue?",
-                yes_text="Yes, Continue",
-                no_text="Cancel",
+                f"源磁盘 ({self.source_disk['letter']}) 不会被修改。\n\n"
+                f"您确定要继续吗？",
+                yes_text="是的，继续",
+                no_text="取消",
                 style="warning",
                 width=550,
                 height=400
@@ -677,12 +677,12 @@ class MainWindow:
 
             # Double confirmation
             response2 = self.show_custom_confirm(
-                "Final Confirmation",
-                f"⚠️ LAST WARNING ⚠️\n\n"
-                f"All data on {self.target_disk['letter']} ({self.target_disk['name']}) will be PERMANENTLY ERASED.\n\n"
-                f"This action cannot be undone!",
-                yes_text="Yes, ERASE and Migrate",
-                no_text="Cancel",
+                "最终确认",
+                f"⚠️ 最后警告 ⚠️\n\n"
+                f"{self.target_disk['letter']} ({self.target_disk['name']}) 上的所有数据将被永久清除。\n\n"
+                f"此操作无法撤销！",
+                yes_text="是的，清除并迁移",
+                no_text="取消",
                 style="danger",
                 width=550,
                 height=330
@@ -714,7 +714,7 @@ class MainWindow:
             self.migration_engine.on_error = self._on_operation_error
 
             # Start migration in thread
-            self._update_status("Migration in progress...")
+            self._update_status("迁移进行中...")
             self.progress_panel.start()
 
             threading.Thread(
@@ -758,14 +758,14 @@ class MainWindow:
 
             # Double confirmation
             response2 = self.show_custom_confirm(
-                "Final Confirmation",
-                f"⚠️ LAST WARNING ⚠️\n\n"
-                f"The disk {self.source_disk['letter']} will be modified.\n"
-                f"Removed partitions will be PERMANENTLY DELETED.\n\n"
-                f"This action cannot be undone!\n\n"
-                f"Do you have a backup?",
-                yes_text="Yes, I have a backup - Proceed",
-                no_text="Cancel",
+                "最终确认",
+                f"⚠️ 最后警告 ⚠️\n\n"
+                f"磁盘 {self.source_disk['letter']} 将被修改。\n"
+                f"删除的分区将被永久删除。\n\n"
+                f"此操作无法撤销！\n\n"
+                f"您是否已有备份？",
+                yes_text="是的，我已备份 - 继续",
+                no_text="取消",
                 style="danger",
                 width=550,
                 height=400
@@ -796,7 +796,7 @@ class MainWindow:
             self.cleanup_engine.on_error = self._on_operation_error
 
             # Start cleanup in thread
-            self._update_status("Cleanup in progress...")
+            self._update_status("清理进行中...")
             self.progress_panel.start()
 
             threading.Thread(
@@ -819,21 +819,21 @@ class MainWindow:
             self._set_ui_enabled(True)
 
             if self.current_mode == "migration":
-                self._update_status("Migration completed successfully!")
+                self._update_status("迁移成功完成！")
                 self.show_custom_info(
-                    "Migration Complete",
-                    "✓ SD card migration completed successfully!\n\n"
-                    "You can now safely remove both SD cards.",
+                    "迁移完成",
+                    "✓ SD 卡迁移成功完成！\n\n"
+                    "您现在可以安全地移除两张 SD 卡。",
                     width=500,
                     height=220
                 )
             else:  # cleanup mode
-                self._update_status("Cleanup completed successfully!")
+                self._update_status("清理成功完成！")
                 self.show_custom_info(
-                    "Cleanup Complete",
-                    "✓ SD card cleanup completed successfully!\n\n"
-                    "Unwanted partitions have been removed and FAT32 has been expanded.\n\n"
-                    "You can now safely remove the SD card.",
+                    "清理完成",
+                    "✓ SD 卡清理成功完成！\n\n"
+                    "不需要的分区已被删除，FAT32 已扩展。\n\n"
+                    "您现在可以安全地移除 SD 卡。",
                     width=550,
                     height=300
                 )
@@ -847,21 +847,21 @@ class MainWindow:
             self._set_ui_enabled(True)
 
             if self.current_mode == "migration":
-                self._update_status(f"Migration failed: {error_msg}")
+                self._update_status(f"迁移失败：{error_msg}")
                 self.show_custom_info(
-                    "Migration Failed",
-                    f"Migration failed with error:\n\n{error_msg}\n\n"
-                    f"The target disk may be in an inconsistent state.",
+                    "迁移失败",
+                    f"迁移失败，错误信息：\n\n{error_msg}\n\n"
+                    f"目标磁盘可能处于不一致状态。",
                     width=550,
                     height=280
                 )
             else:  # cleanup mode
-                self._update_status(f"Cleanup failed: {error_msg}")
+                self._update_status(f"清理失败：{error_msg}")
                 self.show_custom_info(
-                    "Cleanup Failed",
-                    f"Cleanup failed with error:\n\n{error_msg}\n\n"
-                    f"The SD card may be in an inconsistent state.\n"
-                    f"Please restore from backup if needed.",
+                    "清理失败",
+                    f"清理失败，错误信息：\n\n{error_msg}\n\n"
+                    f"SD 卡可能处于不一致状态。\n"
+                    f"如有需要，请从备份恢复。",
                     width=550,
                     height=300
                 )
@@ -887,10 +887,10 @@ class MainWindow:
 
         # Update button text
         if self.log_panel.is_visible():
-            self.log_toggle_btn.config(text="Hide Log")
+            self.log_toggle_btn.config(text="隐藏日志")
             self._save_log_preference(True)
         else:
-            self.log_toggle_btn.config(text="Show Log")
+            self.log_toggle_btn.config(text="显示日志")
             self._save_log_preference(False)
 
     def center_window(self, window):
@@ -971,7 +971,7 @@ class MainWindow:
         if blocking:
             self.root.wait_window(dialog)
 
-    def show_custom_confirm(self, title, message, yes_text="Yes", no_text="No", style="primary", width=450, height=250):
+    def show_custom_confirm(self, title, message, yes_text="是", no_text="否", style="primary", width=450, height=250):
         """Show a custom centered confirmation dialog that returns True or False."""
         # Scale down for 1080p (cosmetic improvement)
         screen_height = self.root.winfo_screenheight()
@@ -1039,107 +1039,107 @@ class MainWindow:
 
     def _show_usage_guide(self):
         """Show usage guide dialog"""
-        usage_text = """USAGE GUIDE
+        usage_text = """使用指南
 
-Step 1: Select Disks
-• Insert both source (smaller) and target (larger) SD cards
-• Click "Refresh Disks" to detect SD cards
-• Select your Source SD Card (original)
-• Select your Target SD Card (destination)
+步骤1: 选择磁盘
+• 插入源SD卡(较小)和目标SD卡(较大)
+• 点击"刷新磁盘"来检测SD卡
+• 选择您的源SD卡(原始卡)
+• 选择您的目标SD卡(目标卡)
 
-WARNING: Target disk will be COMPLETELY ERASED!
+警告: 目标磁盘将被完全擦除!
 
-Step 2: Scan Source
-• Click "Simulate Migration"
-• Wait for the scan to complete
-• Review the detected partition layout
+步骤2: 扫描源卡
+• 点击"模拟迁移"
+• 等待扫描完成
+• 查看检测到的分区布局
 
-The tool automatically detects:
-• FAT32 partition (hos_data)
-• Linux partition (L4T) if present
-• Android partitions (Dynamic or Legacy) if present
-• emuMMC partitions (Single or Dual) if present
+工具会自动检测:
+• FAT32分区 (hos_data)
+• Linux分区 (L4T) 如果存在
+• Android分区 (动态或传统) 如果存在
+• emuMMC分区 (单个或双虚拟系统) 如果存在
 
-Step 3: Configure Migration
-Choose what to migrate:
-• FAT32 Partition (always migrated, auto-expanded)
-• Linux Partition (optional)
-• Android Partitions (optional)
-• emuMMC Partitions (optional)
+步骤3: 配置迁移
+选择要迁移的内容:
+• FAT32分区 (总是迁移，自动扩展)
+• Linux分区 (可选)
+• Android分区 (可选)
+• emuMMC分区 (可选)
 
-Step 4: Review Layout
-• Review the new partition layout
-• Check the comparison showing size changes
-• Verify FAT32 expansion and free space
+步骤4: 查看布局
+• 查看新的分区布局
+• 检查显示大小变化的对比
+• 验证FAT32扩展和可用空间
 
-Step 5: Start Migration
-• Click "Start Migration"
-• Confirm the warning dialogs
-• Wait for migration to complete (30-60 min for 128GB)
+步骤5: 开始迁移
+• 点击"开始迁移"
+• 确认警告对话框
+• 等待迁移完成 (128GB需要30-60分钟)
 
-DO NOT remove SD cards or power off during migration!
+迁移过程中请勿移除SD卡或关机!
 
-Step 6: Verification
-• Safely remove both SD cards
-• Insert target SD card into Nintendo Switch
-• Boot normally - all data and partitions preserved
+步骤6: 验证
+• 安全移除两张SD卡
+• 将目标SD卡插入任天堂Switch
+• 正常启动 - 所有数据和分区都已保留
 """
 
-        self._show_scrollable_dialog("Usage Guide", usage_text, width=700, height=650)
+        self._show_scrollable_dialog("使用指南", usage_text, width=700, height=650)
 
     def _show_troubleshooting(self):
         """Show troubleshooting dialog"""
-        troubleshooting_text = """TROUBLESHOOTING
+        troubleshooting_text = """故障排除
 
-"Administrator Required" Error
-• Right-click the executable and select "Run as Administrator"
-• Administrator privileges are required for direct disk access
+"需要管理员权限"错误
+• 右键点击可执行文件并选择"以管理员身份运行"
+• 直接磁盘访问需要管理员权限
 
-"No SD Cards Found"
-• Make sure SD cards are properly inserted
-• Click "Refresh Disks" to re-scan
-• Try different USB ports
-• Check Device Manager for SD card readers
-• Ensure SD cards are not mounted/in use by other programs
+"未找到SD卡"
+• 确保SD卡正确插入
+• 点击"刷新磁盘"重新扫描
+• 尝试不同的USB端口
+• 在设备管理器中检查SD卡读卡器
+• 确保SD卡未被其他程序挂载/使用
 
-"Target disk must be larger"
-• Ensure target SD card is actually larger than source
-• Some SD cards report slightly different sizes
-• Try a different target card with more capacity
+"目标磁盘必须更大"
+• 确保目标SD卡实际上比源卡大
+• 某些SD卡报告的大小略有不同
+• 尝试容量更大的目标卡
 
-Migration Fails
-• Check SD card connections
-• Try a different SD card reader
-• Verify target SD card is not write-protected
-• Check for bad sectors on target SD card
-• Close all programs accessing the SD cards
-• Run Check Disk (chkdsk) on the SD cards
+迁移失败
+• 检查SD卡连接
+• 尝试不同的SD卡读卡器
+• 验证目标SD卡未写保护
+• 检查目标SD卡是否有坏扇区
+• 关闭所有访问SD卡的程序
+• 在SD卡上运行磁盘检查 (chkdsk)
 
-emuMMC Not Working After Migration
-• The tool automatically updates emuMMC sector offsets
-• If issues persist, verify emuMMC/RAW1 or emuMMC/RAW2
-  folders contain correct offsets
-• Check the log file for emuMMC update errors
-• Ensure "Migrate emuMMC" option was enabled
+迁移后emuMMC不工作
+• 工具会自动更新emuMMC扇区偏移
+• 如果问题持续，验证emuMMC/RAW1或emuMMC/RAW2
+  文件夹包含正确的偏移
+• 检查日志文件中的emuMMC更新错误
+• 确保已启用"迁移emuMMC"选项
 
-Slow Migration Speed
-• Use a high-quality SD card reader (USB 3.0+)
-• Avoid USB hubs - connect directly to PC
-• Close background programs to free up system resources
-• Check if antivirus is scanning the SD cards
+迁移速度慢
+• 使用高质量的SD卡读卡器 (USB 3.0+)
+• 避免USB集线器 - 直接连接到PC
+• 关闭后台程序以释放系统资源
+• 检查杀毒软件是否在扫描SD卡
 
-Partition Layout Incorrect
-• Verify source SD card is correctly set up
-• Check log file for partition detection warnings
-• Try re-scanning the source disk
-• Ensure hekate partition manager was used originally
+分区布局不正确
+• 验证源SD卡设置正确
+• 检查日志文件中的分区检测警告
+• 尝试重新扫描源磁盘
+• 确保最初使用了hekate分区管理器
 
-For more help:
-• Check the log file (NXMigrator_YYYYMMDD_HHMMSS.log)
-• Report issues on GitHub with log file attached
+获取更多帮助:
+• 检查日志文件 (NXMigrator_YYYYMMDD_HHMMSS.log)
+• 在GitHub上报告问题并附上日志文件
 """
 
-        self._show_scrollable_dialog("Troubleshooting", troubleshooting_text, width=700, height=650)
+        self._show_scrollable_dialog("故障排除", troubleshooting_text, width=700, height=650)
 
     def _open_logs(self):
         """Open the most recent log file"""
@@ -1149,8 +1149,8 @@ For more help:
 
             if not log_files:
                 self.show_custom_info(
-                    "No Logs Found",
-                    "No log files found in the current directory.",
+                    "未找到日志",
+                    "当前目录中未找到日志文件。",
                     width=450,
                     height=200
                 )
@@ -1170,8 +1170,8 @@ For more help:
 
         except Exception as e:
             self.show_custom_info(
-                "Error Opening Log",
-                f"Failed to open log file:\n\n{str(e)}",
+                "打开日志错误",
+                f"打开日志文件失败：\n\n{str(e)}",
                 width=500,
                 height=220
             )
@@ -1180,7 +1180,7 @@ For more help:
         """Open GitHub issues page"""
         try:
             # Update this URL to your actual GitHub repository
-            webbrowser.open('https://github.com/yourusername/nx-migrator-pro/issues')
+            webbrowser.open('https://github.com/BadFish-HSrui/NX-Migrator-Pro-cn/issues')
         except Exception as e:
             self.show_custom_info(
                 "Error",
@@ -1200,23 +1200,23 @@ For more help:
 
         about_text = f"""NX MIGRATOR PRO
 
-Version: {version}
+版本: {version}
 
-A professional partition management tool for Nintendo Switch SD cards.
+任天堂Switch SD卡专业分区管理工具。
 
-Features:
-• Migration Mode - Migrate partitions from smaller to larger SD
-• Cleanup Mode - Remove unwanted partitions and expand FAT32
+功能特性:
+• 迁移模式 - 从小容量SD卡迁移分区到大容量SD卡
+• 清理模式 - 删除不需要的分区并扩展FAT32
 
-Supports: FAT32, Linux (L4T), Android, emuMMC
+支持格式: FAT32, Linux (L4T), Android, emuMMC
 
-Copyright (c) 2025 Sthetix
-License: GPL-2.0
+版权所有 (c) 2025 Sthetix
+许可证: GPL-2.0
 
-Made for the Nintendo Switch homebrew community
+为任天堂Switch自制软件社区制作
 """
 
-        self._show_scrollable_dialog("About NX Migrator Pro", about_text, width=600, height=530)
+        self._show_scrollable_dialog("关于 NX Migrator Pro", about_text, width=600, height=530)
 
     def _show_scrollable_dialog(self, title, content, width=600, height=500):
         """Show a scrollable text dialog"""
@@ -1265,7 +1265,7 @@ Made for the Nintendo Switch homebrew community
         # Close button
         ttk.Button(
             content_frame,
-            text="Close",
+            text="关闭",
             command=dialog.destroy,
             bootstyle="primary",
             width=15
@@ -1314,7 +1314,7 @@ Made for the Nintendo Switch homebrew community
                     prefs = json.load(f)
                     if prefs.get('log_panel_visible', False):
                         self.log_panel.show()
-                        self.log_toggle_btn.config(text="Hide Log")
+                        self.log_toggle_btn.config(text="隐藏日志")
         except Exception:
             # Silently ignore errors loading preferences
             pass

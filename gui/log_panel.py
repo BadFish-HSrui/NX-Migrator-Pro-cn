@@ -33,7 +33,7 @@ class LogPanel(ttk.Frame):
         # Title label
         self.title_label = ttk.Label(
             self.control_frame,
-            text="📋 Application Log",
+            text="📋 应用程序日志",
             font=("Segoe UI", 10, "bold"),
             bootstyle="inverse-secondary"
         )
@@ -41,7 +41,7 @@ class LogPanel(ttk.Frame):
         # Control buttons
         self.clear_btn = ttk.Button(
             self.control_frame,
-            text="Clear",
+            text="清空",
             command=self._clear_log,
             bootstyle="secondary-outline",
             width=10
@@ -49,7 +49,7 @@ class LogPanel(ttk.Frame):
 
         self.save_btn = ttk.Button(
             self.control_frame,
-            text="Save Log",
+            text="保存日志",
             command=self._save_log,
             bootstyle="info-outline",
             width=10
@@ -59,7 +59,7 @@ class LogPanel(ttk.Frame):
         self.auto_scroll_var = ttk.BooleanVar(value=True)
         self.auto_scroll_check = ttk.Checkbutton(
             self.control_frame,
-            text="Auto-scroll",
+            text="自动滚动",
             variable=self.auto_scroll_var,
             command=self._toggle_auto_scroll,
             bootstyle="toolbutton"  # Toolbutton style works better on colored backgrounds
@@ -68,7 +68,7 @@ class LogPanel(ttk.Frame):
         # Entry count label
         self.count_label = ttk.Label(
             self.control_frame,
-            text="0 entries",
+            text="0 条记录",
             font=("Segoe UI", 9),
             bootstyle="inverse-secondary"
         )
@@ -191,8 +191,8 @@ class LogPanel(ttk.Frame):
     def _clear_log(self):
         """Clear all log entries"""
         response = messagebox.askyesno(
-            "Clear Log",
-            "Are you sure you want to clear all log entries?\n\nThis cannot be undone.",
+            "清空日志",
+            "您确定要清空所有日志记录吗？\n\n此操作无法撤销。",
             icon='warning'
         )
 
@@ -206,30 +206,30 @@ class LogPanel(ttk.Frame):
     def _save_log(self):
         """Save log to file"""
         if not self.log_entries:
-            messagebox.showinfo("No Logs", "There are no log entries to save.")
+            messagebox.showinfo("无日志", "没有日志记录可保存。")
             return
 
         # Ask for file location
         filename = filedialog.asksaveasfilename(
             defaultextension=".log",
-            filetypes=[("Log files", "*.log"), ("Text files", "*.txt"), ("All files", "*.*")],
+            filetypes=[("日志文件", "*.log"), ("文本文件", "*.txt"), ("所有文件", "*.*")],
             initialfile=f"nx_migrator_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
         )
 
         if filename:
             try:
                 with open(filename, 'w', encoding='utf-8') as f:
-                    f.write(f"NX Migrator Pro - Log Export\n")
-                    f.write(f"Exported: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+                    f.write(f"NX Migrator Pro - 日志导出\n")
+                    f.write(f"导出时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
                     f.write("=" * 80 + "\n\n")
 
                     for entry in self.log_entries:
                         f.write(f"[{entry['timestamp']}] {entry['level']:8s}: {entry['message']}\n")
 
-                messagebox.showinfo("Log Saved", f"Log saved successfully to:\n{filename}")
+                messagebox.showinfo("日志已保存", f"日志已成功保存到：\n{filename}")
 
             except Exception as e:
-                messagebox.showerror("Save Failed", f"Failed to save log file:\n\n{str(e)}")
+                messagebox.showerror("保存失败", f"保存日志文件失败：\n\n{str(e)}")
 
     def _toggle_auto_scroll(self):
         """Toggle auto-scroll feature"""
@@ -242,7 +242,7 @@ class LogPanel(ttk.Frame):
     def _update_count(self):
         """Update the entry count label"""
         count = len(self.log_entries)
-        self.count_label.config(text=f"{count} {'entry' if count == 1 else 'entries'}")
+        self.count_label.config(text=f"{count} 条记录" if count != 1 else "1")
 
 
 class GUILogHandler(logging.Handler):

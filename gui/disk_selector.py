@@ -29,7 +29,7 @@ class DiskSelectorFrame(ttk.Frame):
         # Refresh button
         self.refresh_button = ttk.Button(
             self,
-            text="🔄 Refresh Disks",
+            text="🔄 刷新磁盘",
             command=self._refresh_disks,
             bootstyle=SECONDARY,
             width=20
@@ -38,7 +38,7 @@ class DiskSelectorFrame(ttk.Frame):
         # Source disk section
         self.source_label = ttk.Label(
             self,
-            text="Source SD Card:",
+            text="源SD卡:",
             font=("Segoe UI", 10, "bold")
         )
 
@@ -51,7 +51,7 @@ class DiskSelectorFrame(ttk.Frame):
 
         self.source_info = ttk.Label(
             self,
-            text="Not selected\n\n",  # Pre-allocate 3 lines with blank lines
+            text="未选择\n\n",  # Pre-allocate 3 lines with blank lines
             font=("Segoe UI", 9),
             bootstyle=INFO  # Blue color like the info panel on the right
         )
@@ -62,7 +62,7 @@ class DiskSelectorFrame(ttk.Frame):
         # Target disk section
         self.target_label = ttk.Label(
             self,
-            text="Target SD Card:",
+            text="目标SD卡:",
             font=("Segoe UI", 10, "bold")
         )
 
@@ -75,7 +75,7 @@ class DiskSelectorFrame(ttk.Frame):
 
         self.target_info = ttk.Label(
             self,
-            text="Not selected\n\n",  # Pre-allocate 3 lines with blank lines
+            text="未选择\n\n",  # Pre-allocate 3 lines with blank lines
             font=("Segoe UI", 9),
             bootstyle=INFO  # Blue color like the info panel on the right
         )
@@ -83,7 +83,7 @@ class DiskSelectorFrame(ttk.Frame):
         # Warning label
         self.warning_label = ttk.Label(
             self,
-            text="⚠️ Target disk will be ERASED!",
+            text="⚠️ 目标磁盘将被清空!",
             font=("Segoe UI", 9, "bold"),
             bootstyle=DANGER
         )
@@ -118,15 +118,15 @@ class DiskSelectorFrame(ttk.Frame):
                 if self.main_window:
                     if self.main_window.current_mode == "cleanup":
                         self.main_window.show_custom_info(
-                            "No SD Cards Found",
-                            "No removable drives detected. Please insert an SD card and refresh.",
+                            "未找到SD卡",
+                            "未检测到可移动驱动器。请插入SD卡并刷新。",
                             width=500,
                             height=200
                         )
                     else:
                         self.main_window.show_custom_info(
-                            "No SD Cards Found",
-                            "No removable drives detected. Please insert SD cards and refresh.",
+                            "未找到SD卡",
+                            "未检测到可移动驱动器。请插入SD卡并刷新。",
                             width=500,
                             height=200
                         )
@@ -138,7 +138,7 @@ class DiskSelectorFrame(ttk.Frame):
 
             for drive in drives:
                 # Show: "H: - VOLUME_NAME (128.0 GB SD Card)"
-                volume_name = drive['name'] if drive['name'] != drive['letter'] else "SD Card"
+                volume_name = drive['name'] if drive['name'] != drive['letter'] else "SD 卡"
                 name = f"{drive['letter']} - {volume_name} ({drive['size_gb']:.1f} GB)"
                 drive_names.append(name)
 
@@ -162,9 +162,9 @@ class DiskSelectorFrame(ttk.Frame):
                 if self.main_window.current_mode == "cleanup":
                     # In cleanup mode, only need one SD card
                     self.main_window.show_custom_info(
-                        "SD Cards Detected",
-                        f"Successfully detected {len(drives)} SD card(s).\n\n"
-                        f"Please select the SD card you want to clean up from the dropdown.",
+                        "检测到SD卡",
+                        f"成功检测到 {len(drives)} 张SD卡。\n\n"
+                        f"请从下拉菜单中选择要清理的SD卡。",
                         width=500,
                         height=250
                     )
@@ -172,20 +172,20 @@ class DiskSelectorFrame(ttk.Frame):
                     # In migration mode, need 2 SD cards
                     if len(drives) >= 2:
                         self.main_window.show_custom_info(
-                            "SD Cards Detected",
-                            f"Successfully detected {len(drives)} SD card(s).\n\n"
-                            f"Please select source and target drives from the dropdowns.",
+                            "检测到SD卡",
+                            f"成功检测到 {len(drives)} 张SD卡。\n\n"
+                            f"请从下拉菜单中选择源驱动器和目标驱动器。",
                             width=500,
                             height=250
                         )
                     elif len(drives) == 1:
                         self.main_window.show_custom_info(
-                            "Insufficient SD Cards",
-                            f"Only {len(drives)} SD card detected.\n\n"
-                            f"Migration mode requires TWO mounted SD cards:\n"
-                            f"• Source SD card (smaller)\n"
-                            f"• Target SD card (larger)\n\n"
-                            f"Please insert another SD card and refresh.",
+                            "SD卡数量不足",
+                            f"仅检测到 {len(drives)} 张SD卡。\n\n"
+                            f"迁移模式需要两张已挂载的SD卡:\n"
+                            f"• 源SD卡 (较小容量)\n"
+                            f"• 目标SD卡 (较大容量)\n\n"
+                            f"请插入另一张SD卡并刷新。",
                             width=550,
                             height=330
                         )
@@ -193,8 +193,8 @@ class DiskSelectorFrame(ttk.Frame):
         except Exception as e:
             if self.main_window:
                 self.main_window.show_custom_info(
-                    "Error",
-                    f"Failed to list drives:\n\n{str(e)}",
+                    "错误",
+                    f"列出驱动器失败:\n\n{str(e)}",
                     width=500,
                     height=250
                 )
@@ -209,9 +209,9 @@ class DiskSelectorFrame(ttk.Frame):
         self.source_disk = disk
 
         # Update info label
-        info = f"Drive: {disk['letter']}\n"
-        info += f"Physical: {disk['path']}\n"
-        info += f"Total Size: {disk['size_gb']:.2f} GB"
+        info = f"驱动器: {disk['letter']}\n"
+        info += f"物理路径: {disk['path']}\n"
+        info += f"总容量: {disk['size_gb']:.2f} GB"
         self.source_info.config(text=info)
 
         # Notify callback
@@ -230,8 +230,8 @@ class DiskSelectorFrame(ttk.Frame):
         if self.source_disk and disk['path'] == self.source_disk['path']:
             if self.main_window:
                 self.main_window.show_custom_info(
-                    "Invalid Selection",
-                    "Target disk cannot be the same as source disk!",
+                    "无效选择",
+                    "目标磁盘不能与源磁盘相同!",
                     width=500,
                     height=200
                 )
@@ -241,9 +241,9 @@ class DiskSelectorFrame(ttk.Frame):
         self.target_disk = disk
 
         # Update info label
-        info = f"Drive: {disk['letter']}\n"
-        info += f"Physical: {disk['path']}\n"
-        info += f"Total Size: {disk['size_gb']:.2f} GB"
+        info = f"驱动器: {disk['letter']}\n"
+        info += f"物理路径: {disk['path']}\n"
+        info += f"总容量: {disk['size_gb']:.2f} GB"
         self.target_info.config(text=info)
 
         # Notify callback
@@ -254,7 +254,7 @@ class DiskSelectorFrame(ttk.Frame):
         """Clear target selection"""
         self.target_combobox.set('')
         self.target_disk = None
-        self.target_info.config(text="Not selected\n\n")  # Keep 3 lines to maintain spacing
+        self.target_info.config(text="未选择\n\n")  # Keep 3 lines to maintain spacing
 
     def show_target_selector(self):
         """Show target disk selector widgets (for migration mode)"""
@@ -276,7 +276,7 @@ class DiskSelectorFrame(ttk.Frame):
         """Clear both source and target selections"""
         self.source_combobox.set('')
         self.source_disk = None
-        self.source_info.config(text="Not selected\n\n")
+        self.source_info.config(text="未选择\n\n")
         self.clear_target()
 
     def set_enabled(self, enabled):
