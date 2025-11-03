@@ -10,7 +10,7 @@ from ttkbootstrap.scrolled import ScrolledFrame
 class PartitionViewerFrame(ttk.Frame):
     """Widget to display partition layout"""
 
-    def __init__(self, parent, title="Partitions"):
+    def __init__(self, parent, title="分区"):
         super().__init__(parent)
 
         self.title = title
@@ -40,7 +40,7 @@ class PartitionViewerFrame(ttk.Frame):
         # Disk info
         self.disk_label = ttk.Label(
             self.content_frame,
-            text="No disk selected",
+            text="未选择磁盘",
             font=("Segoe UI", 9),
             bootstyle=SECONDARY
         )
@@ -67,10 +67,10 @@ class PartitionViewerFrame(ttk.Frame):
             height=6
         )
 
-        self.partition_list.heading('name', text='Partition')
-        self.partition_list.heading('type', text='Type')
-        self.partition_list.heading('start', text='Start (MB)')
-        self.partition_list.heading('size', text='Size (MB)')
+        self.partition_list.heading('name', text='分区')
+        self.partition_list.heading('type', text='类型')
+        self.partition_list.heading('start', text='起始位置 (MB)')
+        self.partition_list.heading('size', text='大小 (MB)')
 
         self.partition_list.column('name', width=120)
         self.partition_list.column('type', width=100)
@@ -302,7 +302,7 @@ class PartitionViewerFrame(ttk.Frame):
         self.layout = None
         self.disk_info = None
 
-        self.disk_label.config(text="No disk selected")
+        self.disk_label.config(text="未选择磁盘")
         self.partition_canvas.delete('all')
 
         # Clear legend

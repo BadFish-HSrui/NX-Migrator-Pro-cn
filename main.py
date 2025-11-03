@@ -61,7 +61,7 @@ def main():
 
     # Create root window
     root = ttk.Window(
-        title=f"NX Migrator Pro v{__version__}",
+        title=f"NX Migrator Pro v{__version__} 中文版",
         themename="darkly",
         resizable=(True, True)
     )
@@ -107,10 +107,12 @@ if __name__ == "__main__":
         import ctypes
         if not ctypes.windll.shell32.IsUserAnAdmin():
             messagebox.showerror(
-                "Administrator Required",
-                "This application requires administrator privileges to access raw disk devices.\n\n"
-                "Please run as Administrator."
+                "需要管理员权限",
+                "此应用程序需要管理员权限才能访问原始磁盘设备。\n\n"
+                "请以管理员身份运行。"
             )
             sys.exit(1)
 
     main()
+
+# pyinstaller -F -w -n NX-Migrator-Pro-cn --add-data "tool;tool" -i logo.ico main.py

@@ -32,7 +32,7 @@ class MigrationOptionsFrame(ttk.Frame):
         # Title
         self.title_label = ttk.Label(
             self,
-            text="Select What to Migrate",
+            text="选择要迁移的内容",
             font=("Segoe UI", 11, "bold")
         )
 
@@ -40,7 +40,7 @@ class MigrationOptionsFrame(ttk.Frame):
         self.fat32_var = ttk.BooleanVar(value=True)
         self.fat32_check = ttk.Checkbutton(
             self,
-            text="✓ FAT32 Partition (hos_data)",
+            text="✓ FAT32分区 (hos_data)",
             variable=self.fat32_var,
             command=self._on_option_changed,
             bootstyle="success-round-toggle"
@@ -50,7 +50,7 @@ class MigrationOptionsFrame(ttk.Frame):
         self.expand_var = ttk.BooleanVar(value=True)
         self.expand_check = ttk.Checkbutton(
             self,
-            text="  └─ Expand to fill free space",
+            text="  └─ 扩展以填充空闲空间",
             variable=self.expand_var,
             command=self._on_option_changed,
             bootstyle="info-round-toggle"
@@ -59,7 +59,7 @@ class MigrationOptionsFrame(ttk.Frame):
         self.linux_var = ttk.BooleanVar(value=True)
         self.linux_check = ttk.Checkbutton(
             self,
-            text="✓ Linux Partition (L4T)",
+            text="✓ Linux分区 (L4T)",
             variable=self.linux_var,
             command=self._on_option_changed,
             bootstyle="info-round-toggle"  # Blue to match visual bar
@@ -68,7 +68,7 @@ class MigrationOptionsFrame(ttk.Frame):
         self.android_var = ttk.BooleanVar(value=True)
         self.android_check = ttk.Checkbutton(
             self,
-            text="✓ Android Partitions",
+            text="✓ Android分区",
             variable=self.android_var,
             command=self._on_option_changed,
             bootstyle="info-round-toggle"  # Blue to match Linux toggle
@@ -77,7 +77,7 @@ class MigrationOptionsFrame(ttk.Frame):
         self.emummc_var = ttk.BooleanVar(value=True)
         self.emummc_check = ttk.Checkbutton(
             self,
-            text="✓ emuMMC Partitions",
+            text="✓ emuMMC分区",
             variable=self.emummc_var,
             command=self._on_option_changed,
             bootstyle="info-round-toggle"  # Blue to match Linux toggle
@@ -89,13 +89,13 @@ class MigrationOptionsFrame(ttk.Frame):
         # Quick select buttons
         self.quick_label = ttk.Label(
             self,
-            text="Quick Select:",
+            text="快速选择:",
             font=("Segoe UI", 9, "bold")
         )
 
         self.all_button = ttk.Button(
             self,
-            text="All",
+            text="全选",
             command=self._select_all,
             bootstyle=SUCCESS,
             width=12
@@ -103,7 +103,7 @@ class MigrationOptionsFrame(ttk.Frame):
 
         self.none_button = ttk.Button(
             self,
-            text="None",
+            text="全不选",
             command=self._select_none,
             bootstyle=SECONDARY,
             width=12
@@ -112,7 +112,7 @@ class MigrationOptionsFrame(ttk.Frame):
         # Info label
         self.info_label = ttk.Label(
             self,
-            text="💡 Unchecked partitions will be skipped.\nFAT32 will expand to use freed space.",
+            text="💡 未选中的分区将被跳过。\nFAT32将扩展以使用释放的空间。",
             font=("Segoe UI", 8),
             bootstyle=INFO,
             wraplength=200,
@@ -177,12 +177,12 @@ class MigrationOptionsFrame(ttk.Frame):
 
         if mode == "migration":
             # Migration mode - checkboxes mean "migrate this"
-            self.title_label.config(text="Select What to Migrate")
-            self.linux_check.config(text="✓ Linux Partition (L4T)")
-            self.android_check.config(text="✓ Android Partitions")
-            self.emummc_check.config(text="✓ emuMMC Partitions")
+            self.title_label.config(text="选择要迁移的内容")
+            self.linux_check.config(text="✓ Linux分区 (L4T)")
+            self.android_check.config(text="✓ Android分区")
+            self.emummc_check.config(text="✓ emuMMC分区")
             self.info_label.config(
-                text="💡 Unchecked partitions will be skipped.\nFAT32 will expand to use freed space."
+                text="💡 未选中的分区将被跳过。\nFAT32将扩展以使用释放的空间。"
             )
             # Set all to checked by default in migration mode
             self.linux_var.set(True)
@@ -190,12 +190,12 @@ class MigrationOptionsFrame(ttk.Frame):
             self.emummc_var.set(True)
         else:  # cleanup mode
             # Cleanup mode - checkboxes mean "remove this"
-            self.title_label.config(text="Select What to Remove")
-            self.linux_check.config(text="❌ Remove Linux Partition")
-            self.android_check.config(text="❌ Remove Android Partitions")
-            self.emummc_check.config(text="❌ Remove emuMMC Partitions")
+            self.title_label.config(text="选择要删除的内容")
+            self.linux_check.config(text="❌ 删除Linux分区")
+            self.android_check.config(text="❌ 删除Android分区")
+            self.emummc_check.config(text="❌ 删除emuMMC分区")
             self.info_label.config(
-                text="⚠️ Checked partitions will be DELETED!\nFAT32 will expand to use freed space."
+                text="⚠️ 选中的分区将被删除!\nFAT32将扩展以使用释放的空间。"
             )
             # Set all to unchecked by default in cleanup mode (safer)
             self.linux_var.set(False)

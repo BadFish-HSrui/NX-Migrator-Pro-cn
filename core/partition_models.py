@@ -131,11 +131,11 @@ class DiskLayout:
             parts.append(f"Android ({android_type}): {self.android_size_mb} MB")
 
         if self.has_emummc:
-            emummc_type = "Dual" if self.emummc_double else "Single"
+            emummc_type = "双虚拟系统" if self.emummc_double else "单虚拟系统"
             parts.append(f"emuMMC ({emummc_type}): {self.emummc_size_mb} MB")
 
         free_mb = self.get_free_space_mb()
         if free_mb > 0:
-            parts.append(f"Free: {free_mb} MB")
+            parts.append(f"可用空间: {free_mb} MB")
 
         return " | ".join(parts) if parts else "No partitions"
