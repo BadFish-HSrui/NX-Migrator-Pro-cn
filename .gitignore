@@ -10,7 +10,8 @@ releases/
 
 # Build artifacts
 # Ignore the compiled launcher since it's generated from source
-*.exe
+*.spec
+#*.exe
 dist/
 build/
 

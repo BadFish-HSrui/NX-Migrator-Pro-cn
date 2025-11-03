@@ -61,7 +61,7 @@ def main():
 
     # Create root window
     root = ttk.Window(
-        title=f"NX Migrator Pro v{__version__}",
+        title=f"NX Migrator Pro v{__version__} 中文版",
         themename="darkly",
         resizable=(True, True)
     )
@@ -114,3 +114,4 @@ if __name__ == "__main__":
             sys.exit(1)
 
     main()
+

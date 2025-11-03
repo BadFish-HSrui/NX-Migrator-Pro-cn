@@ -1049,20 +1049,20 @@ class MainWindow:
 
 警告: 目标磁盘将被完全擦除!
 
-步骤2: 扫描源卡
+步骤2: 扫描源SD卡
 • 点击"模拟迁移"
 • 等待扫描完成
 • 查看检测到的分区布局
 
 工具会自动检测:
 • FAT32分区 (hos_data)
-• Linux分区 (L4T) 如果存在
-• Android分区 (动态或传统) 如果存在
-• emuMMC分区 (单个或双虚拟系统) 如果存在
+• Linux分区 (L4T)
+• Android分区 (动态或传统)
+• emuMMC分区 (单个或双虚拟系统)
 
 步骤3: 配置迁移
 选择要迁移的内容:
-• FAT32分区 (总是迁移，自动扩展)
+• FAT32分区 (默认迁移，自动扩展)
 • Linux分区 (可选)
 • Android分区 (可选)
 • emuMMC分区 (可选)
@@ -1091,7 +1091,7 @@ class MainWindow:
         """Show troubleshooting dialog"""
         troubleshooting_text = """故障排除
 
-"需要管理员权限"错误
+"需要管理员权限"
 • 右键点击可执行文件并选择"以管理员身份运行"
 • 直接磁盘访问需要管理员权限
 
@@ -1214,6 +1214,11 @@ class MainWindow:
 许可证: GPL-2.0
 
 为任天堂Switch自制软件社区制作
+
+---
+中文翻译 葡萄糖酸菜鱼;南宫镜
+此中文翻译版为非官方版本, 推荐使用官方英文版
+https://github.com/sthetix/NX-Migrator-Pro/releases
 """
 
         self._show_scrollable_dialog("关于 NX Migrator Pro", about_text, width=600, height=530)
